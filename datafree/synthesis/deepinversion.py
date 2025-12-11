@@ -8,7 +8,7 @@ from .base import BaseSynthesis
 from datafree.hooks import DeepInversionHook
 from datafree.criterions import jsdiv, get_image_prior_losses
 from datafree.utils import ImagePool, DataIter, clip_images
-
+from math import log
 
 def jitter_and_flip(inputs_jit, lim=1. / 8., do_flip=True):
     lim_0, lim_1 = int(inputs_jit.shape[-2] * lim), int(inputs_jit.shape[-1] * lim)
@@ -33,7 +33,7 @@ class DeepInvSyntheiszer(BaseSynthesis):
                  save_dir='run/deepinversion', transform=None,
                  normalizer=None, device='cpu',
                  # TODO: FP16 and distributed training
-                 autocast=None, use_fp16=False, distributed=False):
+                 autocast=None, use_fp16=False, distributed=False, flatten:bool = False):
         super(DeepInvSyntheiszer, self).__init__(teacher, student)
         assert len(img_size) == 3, "image size should be a 3-dimension tuple"
 
@@ -47,6 +47,7 @@ class DeepInvSyntheiszer(BaseSynthesis):
         self.transform = transform
         self.synthesis_batch_size = synthesis_batch_size
         self.sample_batch_size = sample_batch_size
+        self.flatten = flatten
 
         # Scaling factors
         self.adv = adv
@@ -56,6 +57,7 @@ class DeepInvSyntheiszer(BaseSynthesis):
         self.l2 = l2
         self.num_classes = num_classes
         self.distributed = distributed
+        self.classes_counter = [0 for _ in range(self.num_classes)]
 
         # training configs
         self.progressive_scale = progressive_scale
@@ -88,6 +90,7 @@ class DeepInvSyntheiszer(BaseSynthesis):
         optimizer = torch.optim.Adam([inputs], self.lr_g, betas=[0.5, 0.99])
         # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR( optimizer, T_max=self.iterations )
 
+        best_targets = None
         best_inputs = inputs.data
         for it in range(self.iterations):
             inputs_aug = jitter_and_flip(inputs)
@@ -108,11 +111,29 @@ class DeepInvSyntheiszer(BaseSynthesis):
             if best_cost > loss.item():
                 best_cost = loss.item()
                 best_inputs = inputs.data
+                best_targets = targets
+
+            if self.flatten and sum(list(map(lambda x:1 if x>0 else 0,self.classes_counter)))==self.num_classes:
+                y = [self.classes_counter[i]/sum(self.classes_counter) for i in range(self.num_classes)]
+                def h_info(p):
+                    s = 0
+                    for p_i in p:
+                        s+=p_i*log(p_i,10)
+                    return s/len(p)
+                l_inf = -h_info(y)
+
+                loss += l_inf
+
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
             # scheduler.step()
             inputs.data = clip_images(inputs.data, self.normalizer.mean, self.normalizer.std)
+
+        if self.flatten:
+            for c in list(best_targets):
+                self.classes_counter[c]=self.classes_counter[c]+1
+
         self.student.train()
         # save best inputs and reset data loader
         if self.normalizer:

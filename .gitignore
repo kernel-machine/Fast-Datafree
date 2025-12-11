@@ -1,0 +1,7 @@
+env
+**/__pycache__
+run
+checkpoints
+data
+imagenet32
+tb_runs

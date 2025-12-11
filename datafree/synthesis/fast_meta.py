@@ -12,6 +12,8 @@ from datafree.utils import ImagePool, DataIter, clip_images
 from torchvision import transforms
 from kornia import augmentation
 import time
+from statistics import mean
+import numpy as np
 
 def reptile_grad(src, tar):
     for p, tar_p in zip(src.parameters(), tar.parameters()):
@@ -48,7 +50,7 @@ class FastMetaSynthesizer(BaseSynthesis):
                  adv=0.0, bn=1, oh=1,
                  save_dir='run/fast', transform=None, autocast=None, use_fp16=False,
                  normalizer=None, device='cpu', distributed=False, lr_z = 0.01,
-                 warmup=10, reset_l0=0, reset_bn=0, bn_mmt=0,
+                 warmup=10, reset_l0=0, reset_bn=0, bn_mmt=0, flatten:bool = False,
                  is_maml=1):
         super(FastMetaSynthesizer, self).__init__(teacher, student)
         self.save_dir = save_dir
@@ -62,6 +64,7 @@ class FastMetaSynthesizer(BaseSynthesis):
         self.oh = oh
         self.bn_mmt = bn_mmt
         self.ismaml = is_maml
+        self.flatten = flatten
 
         self.num_classes = num_classes
         self.distributed = distributed
@@ -77,6 +80,8 @@ class FastMetaSynthesizer(BaseSynthesis):
         self.generator = generator.to(device).train()
         self.device = device
         self.hooks = []
+        self.classes_counter = [0 for _ in range(self.num_classes)]
+        self.target_counter = [0 for _ in range(self.num_classes)]
 
         self.ep = 0
         self.ep_start = warmup
@@ -113,7 +118,15 @@ class FastMetaSynthesizer(BaseSynthesis):
         best_inputs = None
         z = torch.randn(size=(self.synthesis_batch_size, self.nz), device=self.device).requires_grad_() 
         if targets is None:
-            targets = torch.randint(low=0, high=self.num_classes, size=(self.synthesis_batch_size,))
+            if not self.flatten:
+                targets = torch.randint(low=0, high=self.num_classes, size=(self.synthesis_batch_size,))
+            else:
+                targets = []
+                while len(targets) < self.sample_batch_size:
+                    min_class = int(np.argmin(self.classes_counter))
+                    targets.append(min_class)
+                    self.classes_counter[min_class]+=1                    
+                targets = torch.tensor(targets)
         else:
             targets = targets.sort()[0] # sort for better visualization
         targets = targets.to(self.device)
@@ -153,6 +166,8 @@ class FastMetaSynthesizer(BaseSynthesis):
                 if best_cost > loss.item() or best_inputs is None:
                     best_cost = loss.item()
                     best_inputs = inputs.data
+                    for c in torch.argmax(t_out, dim=-1):
+                        self.target_counter[c]+=1
 
             optimizer.zero_grad()
             loss.backward()
@@ -177,6 +192,9 @@ class FastMetaSynthesizer(BaseSynthesis):
         self.student.train()
         self.prev_z = (z, targets)
         end = time.time()
+
+        print("Predicted classes",self.target_counter)
+        print("Target class",self.classes_counter)
 
         self.data_pool.add( best_inputs )
         dst = self.data_pool.get_dataset(transform=self.transform)

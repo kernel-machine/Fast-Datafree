@@ -212,19 +212,19 @@ def main_worker(gpu, ngpus_per_node, args):
                 checkpoint = torch.load(args.resume, map_location=loc)
 
             if isinstance(model, nn.Module):
-                model.load_state_dict(checkpoint['state_dict'])
+                model.load_state_dict(checkpoint)#['state_dict'])
             else:
                 model.module.load_state_dict(checkpoint['state_dict'])
             
-            best_acc1 = checkpoint['best_acc1']
+            #best_acc1 = checkpoint['best_acc1']
 
-            try: 
-                args.start_epoch = checkpoint['epoch']
-                optimizer.load_state_dict(checkpoint['optimizer'])
-                scheduler.load_state_dict(checkpoint['scheduler'])
-            except: print("Fails to load additional information")
-            print("[!] loaded checkpoint '{}' (epoch {} acc {})"
-                  .format(args.resume, checkpoint['epoch'], best_acc1))
+            # try: 
+            #     args.start_epoch = checkpoint['epoch']
+            #     optimizer.load_state_dict(checkpoint['optimizer'])
+            #     scheduler.load_state_dict(checkpoint['scheduler'])
+            # except: print("Fails to load additional information")
+            # print("[!] loaded checkpoint '{}' (epoch {} acc {})"
+            #       .format(args.resume, checkpoint['epoch'], best_acc1))
         else:
             print("[!] no checkpoint found at '{}'".format(args.resume))
 

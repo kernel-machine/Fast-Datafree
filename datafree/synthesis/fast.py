@@ -14,7 +14,10 @@ import collections
 from torchvision import transforms
 from kornia import augmentation
 import time
-
+from math import log
+from statistics import mean
+from torch.utils.tensorboard import SummaryWriter
+from tqdm import tqdm
 
 def reset_l0(model):
     for n, m in model.named_modules():
@@ -56,7 +59,7 @@ class FastSynthesizer(BaseSynthesis):
                  save_dir='run/fast', transform=None, autocast=None, use_fp16=False,
                  normalizer=None, device='cpu', distributed=False, lr_z=0.01,
                  warmup=10, reset_l0=0, reset_bn=0, bn_mmt=0,
-                 is_maml=1):
+                 is_maml=1, flatten:bool = False):
         super(FastSynthesizer, self).__init__(teacher, student)
         self.save_dir = save_dir
         self.img_size = img_size
@@ -69,6 +72,7 @@ class FastSynthesizer(BaseSynthesis):
         self.oh = oh
         self.bn_mmt = bn_mmt
         self.ismaml = is_maml
+        self.flatten = flatten
 
         self.num_classes = num_classes
         self.distributed = distributed
@@ -90,6 +94,7 @@ class FastSynthesizer(BaseSynthesis):
         self.reset_l0 = reset_l0
         self.reset_bn = reset_bn
         self.prev_z = None
+        self.classes_counter = [0 for _ in range(self.num_classes)]
 
         for m in teacher.modules():
             if isinstance(m, nn.BatchNorm2d):
@@ -100,7 +105,9 @@ class FastSynthesizer(BaseSynthesis):
             normalizer,
         ])
 
-    def synthesize(self, targets=None):
+        self.writer = SummaryWriter(log_dir="tb_runs")
+
+    def synthesize(self):
 
         start = time.time()
 
@@ -114,11 +121,9 @@ class FastSynthesizer(BaseSynthesis):
 
         # inputs = torch.randn( size=(self.synthesis_batch_size, *self.img_size), device=self.device ).requires_grad_()
         best_inputs = None
+        best_targets = None
         z = torch.randn(size=(self.synthesis_batch_size, self.nz), device=self.device).requires_grad_()
-        if targets is None:
-            targets = torch.randint(low=0, high=self.num_classes, size=(self.synthesis_batch_size,))
-        else:
-            targets = targets.sort()[0]  # sort for better visualization
+        targets = torch.randint(low=0, high=self.num_classes, size=(self.synthesis_batch_size,))
         targets = targets.to(self.device)
 
         optimizer = torch.optim.Adam([
@@ -126,7 +131,13 @@ class FastSynthesizer(BaseSynthesis):
             {'params': [z], 'lr': self.lr_z}
         ], lr=self.lr_g, betas=[0.5, 0.999])
 
-        for it in range(self.iterations):
+        losses_bn = []
+        losses_oh = []
+        losses_adv = []
+        losses = []
+        gen_bar = tqdm(range(self.iterations), desc="Generation", leave=True)
+        for it in gen_bar:
+            
             inputs = self.generator(z)
             inputs_aug = self.aug(inputs)  # crop and normalize
 
@@ -134,12 +145,10 @@ class FastSynthesizer(BaseSynthesis):
             # Inversion Loss
             #############################################
             t_out = self.teacher(inputs_aug)
-            if targets is None:
-                targets = torch.argmax(t_out, dim=-1)
-                targets = targets.to(self.device)
 
             loss_bn = sum([h.r_feature for h in self.hooks])
             loss_oh = F.cross_entropy(t_out, targets)
+
             if self.adv > 0 and (self.ep >= self.ep_start):
                 s_out = self.student(inputs_aug)
                 mask = (s_out.max(1)[1] == t_out.max(1)[1]).float()
@@ -147,23 +156,61 @@ class FastSynthesizer(BaseSynthesis):
                     1) * mask).mean()  # decision adversarial distillation
             else:
                 loss_adv = loss_oh.new_zeros(1)
-            loss = self.bn * loss_bn + self.oh * loss_oh + self.adv * loss_adv
+            
+            loss = self.oh * loss_oh + self.adv * loss_adv + self.bn * loss_bn
+
+            gen_bar.set_postfix({
+                "L_oh":loss_oh.item(),
+                "L_adv":loss_adv.item(),
+                "L_feat":loss_bn.item(),
+                "L_g":loss.item()
+                })
+            
+            
+            losses_bn.append(loss_bn.item())
+            losses_adv.append(loss_adv.item())
+            losses_oh.append(loss_oh.item())
+            losses.append(loss.item())
 
             with torch.no_grad():
                 if best_cost > loss.item() or best_inputs is None:
                     best_cost = loss.item()
                     best_inputs = inputs.data
+                    best_targets = targets
+
+            if self.flatten:
+                def SSD(values):
+                    avg = mean(values)
+                    s = 0
+                    for p in values:
+                        s+=((p-avg)**2)
+                    return s
+
+                tmp_class_counter = [x for x in self.classes_counter]
+                for c in list(targets):
+                    tmp_class_counter[c]+=1
+
+                flatten_loss = SSD(tmp_class_counter)
+                loss += flatten_loss
+                print(f"Loss",flatten_loss, loss.item())
+                print(targets)
 
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
+            self.writer.add_scalar("Generator/ADV_Loss", mean(losses_adv), self.ep)
+            self.writer.add_scalar("Generator/Feat_Loss", mean(losses_bn), self.ep)
+            self.writer.add_scalar("Generator/OH_Loss", mean(losses_oh), self.ep)
+            self.writer.add_scalar("Generator/Loss", mean(losses), self.ep)
+            self.writer.flush()
+
         if self.bn_mmt != 0:
             for h in self.hooks:
                 h.update_mmt()
 
-        self.student.train()
-        self.prev_z = (z, targets)
+        #self.student.train()
+        #self.prev_z = (z, targets)
         end = time.time()
 
         self.data_pool.add(best_inputs)

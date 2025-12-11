@@ -1,0 +1,228 @@
+[12/03 15:43:55 cifar10-resnet34]: data_root: imagenet32
+[12/03 15:43:55 cifar10-resnet34]: model: resnet34
+[12/03 15:43:55 cifar10-resnet34]: dataset: cifar10
+[12/03 15:43:55 cifar10-resnet34]: epochs: 200
+[12/03 15:43:55 cifar10-resnet34]: batch_size: 256
+[12/03 15:43:55 cifar10-resnet34]: lr: 0.1
+[12/03 15:43:55 cifar10-resnet34]: lr_decay_milestones: 120,150,180
+[12/03 15:43:55 cifar10-resnet34]: evaluate_only: False
+[12/03 15:43:55 cifar10-resnet34]: resume: 
+[12/03 15:43:55 cifar10-resnet34]: gpu: None
+[12/03 15:43:55 cifar10-resnet34]: fp16: False
+[12/03 15:43:55 cifar10-resnet34]: world_size: -1
+[12/03 15:43:55 cifar10-resnet34]: rank: -1
+[12/03 15:43:55 cifar10-resnet34]: dist_url: tcp://224.66.41.62:23456
+[12/03 15:43:55 cifar10-resnet34]: dist_backend: nccl
+[12/03 15:43:55 cifar10-resnet34]: multiprocessing_distributed: False
+[12/03 15:43:55 cifar10-resnet34]: workers: 16
+[12/03 15:43:55 cifar10-resnet34]: start_epoch: 0
+[12/03 15:43:55 cifar10-resnet34]: momentum: 0.9
+[12/03 15:43:55 cifar10-resnet34]: pretrained: False
+[12/03 15:43:55 cifar10-resnet34]: weight_decay: 0.0001
+[12/03 15:43:55 cifar10-resnet34]: print_freq: 0
+[12/03 15:43:55 cifar10-resnet34]: seed: None
+[12/03 15:43:55 cifar10-resnet34]: distributed: False
+[12/03 15:43:55 cifar10-resnet34]: ngpus_per_node: 1
+[12/03 15:43:55 cifar10-resnet34]: autocast: <function dummy_ctx at 0x7dc2ae7fb4c0>
+[12/03 15:43:55 cifar10-resnet34]: logger: <Logger cifar10-resnet34 (DEBUG)>
+[12/03 15:45:33 cifar10-resnet34]: [Eval] Epoch=0 Acc@1=27.5800 Acc@5=84.6500 Loss=1.8833 Lr=0.1000
+[12/03 15:47:06 cifar10-resnet34]: [Eval] Epoch=1 Acc@1=45.8700 Acc@5=92.6000 Loss=1.4506 Lr=0.1000
+[12/03 15:48:43 cifar10-resnet34]: [Eval] Epoch=2 Acc@1=50.0000 Acc@5=93.4000 Loss=1.4390 Lr=0.1000
+[12/03 15:50:20 cifar10-resnet34]: [Eval] Epoch=3 Acc@1=63.1000 Acc@5=96.5100 Loss=1.0490 Lr=0.1000
+[12/03 15:51:57 cifar10-resnet34]: [Eval] Epoch=4 Acc@1=62.9800 Acc@5=96.5400 Loss=1.0936 Lr=0.1000
+[12/03 15:53:33 cifar10-resnet34]: [Eval] Epoch=5 Acc@1=71.0300 Acc@5=97.9600 Loss=0.8270 Lr=0.1000
+[12/03 15:55:07 cifar10-resnet34]: [Eval] Epoch=6 Acc@1=75.0500 Acc@5=98.7600 Loss=0.7393 Lr=0.1000
+[12/03 15:56:42 cifar10-resnet34]: [Eval] Epoch=7 Acc@1=78.1200 Acc@5=98.6000 Loss=0.6464 Lr=0.1000
+[12/03 15:58:18 cifar10-resnet34]: [Eval] Epoch=8 Acc@1=75.9100 Acc@5=98.5600 Loss=0.6911 Lr=0.1000
+[12/03 15:59:54 cifar10-resnet34]: [Eval] Epoch=9 Acc@1=81.3800 Acc@5=99.0700 Loss=0.5595 Lr=0.1000
+[12/03 16:01:32 cifar10-resnet34]: [Eval] Epoch=10 Acc@1=83.5500 Acc@5=99.3400 Loss=0.4879 Lr=0.1000
+[12/03 16:03:09 cifar10-resnet34]: [Eval] Epoch=11 Acc@1=82.6900 Acc@5=99.3800 Loss=0.5213 Lr=0.1000
+[12/03 16:04:47 cifar10-resnet34]: [Eval] Epoch=12 Acc@1=82.8900 Acc@5=99.3300 Loss=0.4983 Lr=0.1000
+[12/03 16:06:25 cifar10-resnet34]: [Eval] Epoch=13 Acc@1=84.1300 Acc@5=99.2100 Loss=0.4980 Lr=0.1000
+[12/03 16:08:03 cifar10-resnet34]: [Eval] Epoch=14 Acc@1=84.7200 Acc@5=99.4600 Loss=0.4710 Lr=0.1000
+[12/03 16:09:41 cifar10-resnet34]: [Eval] Epoch=15 Acc@1=85.4600 Acc@5=99.4700 Loss=0.4507 Lr=0.1000
+[12/03 16:11:18 cifar10-resnet34]: [Eval] Epoch=16 Acc@1=85.0800 Acc@5=99.4900 Loss=0.4662 Lr=0.1000
+[12/03 16:12:58 cifar10-resnet34]: [Eval] Epoch=17 Acc@1=85.7500 Acc@5=99.5200 Loss=0.4580 Lr=0.1000
+[12/03 16:14:37 cifar10-resnet34]: [Eval] Epoch=18 Acc@1=87.9100 Acc@5=99.5200 Loss=0.3839 Lr=0.1000
+[12/03 16:16:15 cifar10-resnet34]: [Eval] Epoch=19 Acc@1=85.8200 Acc@5=99.4900 Loss=0.4332 Lr=0.1000
+[12/03 16:17:53 cifar10-resnet34]: [Eval] Epoch=20 Acc@1=88.2300 Acc@5=99.7200 Loss=0.3702 Lr=0.1000
+[12/03 16:19:32 cifar10-resnet34]: [Eval] Epoch=21 Acc@1=88.6600 Acc@5=99.7200 Loss=0.3429 Lr=0.1000
+[12/03 16:21:08 cifar10-resnet34]: [Eval] Epoch=22 Acc@1=83.9400 Acc@5=99.1100 Loss=0.5395 Lr=0.1000
+[12/03 16:22:43 cifar10-resnet34]: [Eval] Epoch=23 Acc@1=87.3900 Acc@5=99.6100 Loss=0.4059 Lr=0.1000
+[12/03 16:24:18 cifar10-resnet34]: [Eval] Epoch=24 Acc@1=85.0000 Acc@5=99.1600 Loss=0.5345 Lr=0.1000
+[12/03 16:25:54 cifar10-resnet34]: [Eval] Epoch=25 Acc@1=86.7000 Acc@5=99.5400 Loss=0.4386 Lr=0.1000
+[12/03 16:27:28 cifar10-resnet34]: [Eval] Epoch=26 Acc@1=88.3200 Acc@5=99.4400 Loss=0.3966 Lr=0.1000
+[12/03 16:29:01 cifar10-resnet34]: [Eval] Epoch=27 Acc@1=88.8800 Acc@5=99.7400 Loss=0.3579 Lr=0.1000
+[12/03 16:30:35 cifar10-resnet34]: [Eval] Epoch=28 Acc@1=88.7100 Acc@5=99.7000 Loss=0.3680 Lr=0.1000
+[12/03 16:32:07 cifar10-resnet34]: [Eval] Epoch=29 Acc@1=88.5500 Acc@5=99.6500 Loss=0.3741 Lr=0.1000
+[12/03 16:33:38 cifar10-resnet34]: [Eval] Epoch=30 Acc@1=88.4800 Acc@5=99.6800 Loss=0.4029 Lr=0.1000
+[12/03 16:35:10 cifar10-resnet34]: [Eval] Epoch=31 Acc@1=90.1900 Acc@5=99.7100 Loss=0.3322 Lr=0.1000
+[12/03 16:36:42 cifar10-resnet34]: [Eval] Epoch=32 Acc@1=88.6700 Acc@5=99.5500 Loss=0.4012 Lr=0.1000
+[12/03 16:38:14 cifar10-resnet34]: [Eval] Epoch=33 Acc@1=89.3900 Acc@5=99.7000 Loss=0.3595 Lr=0.1000
+[12/03 16:39:46 cifar10-resnet34]: [Eval] Epoch=34 Acc@1=89.1200 Acc@5=99.6200 Loss=0.3830 Lr=0.1000
+[12/03 16:41:17 cifar10-resnet34]: [Eval] Epoch=35 Acc@1=90.3100 Acc@5=99.7100 Loss=0.3542 Lr=0.1000
+[12/03 16:42:49 cifar10-resnet34]: [Eval] Epoch=36 Acc@1=89.6700 Acc@5=99.7800 Loss=0.3832 Lr=0.1000
+[12/03 16:44:20 cifar10-resnet34]: [Eval] Epoch=37 Acc@1=89.7800 Acc@5=99.5600 Loss=0.3550 Lr=0.1000
+[12/03 16:45:53 cifar10-resnet34]: [Eval] Epoch=38 Acc@1=89.6900 Acc@5=99.7000 Loss=0.3557 Lr=0.1000
+[12/03 16:47:25 cifar10-resnet34]: [Eval] Epoch=39 Acc@1=89.3400 Acc@5=99.5600 Loss=0.3908 Lr=0.1000
+[12/03 16:48:57 cifar10-resnet34]: [Eval] Epoch=40 Acc@1=90.0900 Acc@5=99.8000 Loss=0.3606 Lr=0.1000
+[12/03 16:50:29 cifar10-resnet34]: [Eval] Epoch=41 Acc@1=90.4500 Acc@5=99.6700 Loss=0.3435 Lr=0.1000
+[12/03 16:52:02 cifar10-resnet34]: [Eval] Epoch=42 Acc@1=88.8900 Acc@5=99.6000 Loss=0.4340 Lr=0.1000
+[12/03 16:53:35 cifar10-resnet34]: [Eval] Epoch=43 Acc@1=90.6700 Acc@5=99.6900 Loss=0.3671 Lr=0.1000
+[12/03 16:55:05 cifar10-resnet34]: [Eval] Epoch=44 Acc@1=89.7100 Acc@5=99.6700 Loss=0.3909 Lr=0.1000
+[12/03 16:56:35 cifar10-resnet34]: [Eval] Epoch=45 Acc@1=90.6200 Acc@5=99.6200 Loss=0.3487 Lr=0.1000
+[12/03 16:58:06 cifar10-resnet34]: [Eval] Epoch=46 Acc@1=90.6900 Acc@5=99.7000 Loss=0.3431 Lr=0.1000
+[12/03 16:59:36 cifar10-resnet34]: [Eval] Epoch=47 Acc@1=90.4000 Acc@5=99.6400 Loss=0.3549 Lr=0.1000
+[12/03 17:01:07 cifar10-resnet34]: [Eval] Epoch=48 Acc@1=90.2900 Acc@5=99.7000 Loss=0.3595 Lr=0.1000
+[12/03 17:02:38 cifar10-resnet34]: [Eval] Epoch=49 Acc@1=87.3500 Acc@5=99.4300 Loss=0.5135 Lr=0.1000
+[12/03 17:04:09 cifar10-resnet34]: [Eval] Epoch=50 Acc@1=89.8300 Acc@5=99.7000 Loss=0.3896 Lr=0.1000
+[12/03 17:05:40 cifar10-resnet34]: [Eval] Epoch=51 Acc@1=90.0900 Acc@5=99.6300 Loss=0.3706 Lr=0.1000
+[12/03 17:07:12 cifar10-resnet34]: [Eval] Epoch=52 Acc@1=89.4600 Acc@5=99.5400 Loss=0.4136 Lr=0.1000
+[12/03 17:08:42 cifar10-resnet34]: [Eval] Epoch=53 Acc@1=90.2900 Acc@5=99.5900 Loss=0.3830 Lr=0.1000
+[12/03 17:10:14 cifar10-resnet34]: [Eval] Epoch=54 Acc@1=87.8800 Acc@5=99.4600 Loss=0.5045 Lr=0.1000
+[12/03 17:11:45 cifar10-resnet34]: [Eval] Epoch=55 Acc@1=90.3900 Acc@5=99.6000 Loss=0.3814 Lr=0.1000
+[12/03 17:13:17 cifar10-resnet34]: [Eval] Epoch=56 Acc@1=90.1100 Acc@5=99.5200 Loss=0.3955 Lr=0.1000
+[12/03 17:14:49 cifar10-resnet34]: [Eval] Epoch=57 Acc@1=90.9700 Acc@5=99.6200 Loss=0.3447 Lr=0.1000
+[12/03 17:16:21 cifar10-resnet34]: [Eval] Epoch=58 Acc@1=91.3200 Acc@5=99.6500 Loss=0.3455 Lr=0.1000
+[12/03 17:17:53 cifar10-resnet34]: [Eval] Epoch=59 Acc@1=90.9000 Acc@5=99.4700 Loss=0.3589 Lr=0.1000
+[12/03 17:19:25 cifar10-resnet34]: [Eval] Epoch=60 Acc@1=90.2100 Acc@5=99.6500 Loss=0.3759 Lr=0.1000
+[12/03 17:20:58 cifar10-resnet34]: [Eval] Epoch=61 Acc@1=89.9800 Acc@5=99.4400 Loss=0.4114 Lr=0.1000
+[12/03 17:22:29 cifar10-resnet34]: [Eval] Epoch=62 Acc@1=90.7900 Acc@5=99.7000 Loss=0.3600 Lr=0.1000
+[12/03 17:24:02 cifar10-resnet34]: [Eval] Epoch=63 Acc@1=91.4000 Acc@5=99.5900 Loss=0.3378 Lr=0.1000
+[12/03 17:25:34 cifar10-resnet34]: [Eval] Epoch=64 Acc@1=90.9500 Acc@5=99.5400 Loss=0.3692 Lr=0.1000
+[12/03 17:27:07 cifar10-resnet34]: [Eval] Epoch=65 Acc@1=91.5600 Acc@5=99.7600 Loss=0.3277 Lr=0.1000
+[12/03 17:28:38 cifar10-resnet34]: [Eval] Epoch=66 Acc@1=90.6800 Acc@5=99.7900 Loss=0.3546 Lr=0.1000
+[12/03 17:30:08 cifar10-resnet34]: [Eval] Epoch=67 Acc@1=90.8200 Acc@5=99.5900 Loss=0.3601 Lr=0.1000
+[12/03 17:31:38 cifar10-resnet34]: [Eval] Epoch=68 Acc@1=91.1800 Acc@5=99.8000 Loss=0.3491 Lr=0.1000
+[12/03 17:33:09 cifar10-resnet34]: [Eval] Epoch=69 Acc@1=90.9300 Acc@5=99.6600 Loss=0.3568 Lr=0.1000
+[12/03 17:34:40 cifar10-resnet34]: [Eval] Epoch=70 Acc@1=90.9600 Acc@5=99.6600 Loss=0.3477 Lr=0.1000
+[12/03 17:36:10 cifar10-resnet34]: [Eval] Epoch=71 Acc@1=89.8300 Acc@5=99.5500 Loss=0.3981 Lr=0.1000
+[12/03 17:37:42 cifar10-resnet34]: [Eval] Epoch=72 Acc@1=90.6300 Acc@5=99.6500 Loss=0.3701 Lr=0.1000
+[12/03 17:39:12 cifar10-resnet34]: [Eval] Epoch=73 Acc@1=90.6700 Acc@5=99.6400 Loss=0.3662 Lr=0.1000
+[12/03 17:40:44 cifar10-resnet34]: [Eval] Epoch=74 Acc@1=90.8100 Acc@5=99.7000 Loss=0.3724 Lr=0.1000
+[12/03 17:42:15 cifar10-resnet34]: [Eval] Epoch=75 Acc@1=90.5000 Acc@5=99.6200 Loss=0.3839 Lr=0.1000
+[12/03 17:43:46 cifar10-resnet34]: [Eval] Epoch=76 Acc@1=91.1100 Acc@5=99.6500 Loss=0.3559 Lr=0.1000
+[12/03 17:45:18 cifar10-resnet34]: [Eval] Epoch=77 Acc@1=91.1900 Acc@5=99.6400 Loss=0.3443 Lr=0.1000
+[12/03 17:46:50 cifar10-resnet34]: [Eval] Epoch=78 Acc@1=90.1500 Acc@5=99.6500 Loss=0.4046 Lr=0.1000
+[12/03 17:48:22 cifar10-resnet34]: [Eval] Epoch=79 Acc@1=89.9000 Acc@5=99.6500 Loss=0.4015 Lr=0.1000
+[12/03 17:49:53 cifar10-resnet34]: [Eval] Epoch=80 Acc@1=89.3900 Acc@5=99.5300 Loss=0.4220 Lr=0.1000
+[12/03 17:51:25 cifar10-resnet34]: [Eval] Epoch=81 Acc@1=90.6800 Acc@5=99.7400 Loss=0.3756 Lr=0.1000
+[12/03 17:52:57 cifar10-resnet34]: [Eval] Epoch=82 Acc@1=90.7100 Acc@5=99.6700 Loss=0.3485 Lr=0.1000
+[12/03 17:54:30 cifar10-resnet34]: [Eval] Epoch=83 Acc@1=90.7900 Acc@5=99.5300 Loss=0.3728 Lr=0.1000
+[12/03 17:56:02 cifar10-resnet34]: [Eval] Epoch=84 Acc@1=90.5400 Acc@5=99.7500 Loss=0.3679 Lr=0.1000
+[12/03 17:57:34 cifar10-resnet34]: [Eval] Epoch=85 Acc@1=89.8400 Acc@5=99.5700 Loss=0.4243 Lr=0.1000
+[12/03 17:59:06 cifar10-resnet34]: [Eval] Epoch=86 Acc@1=89.9000 Acc@5=99.7000 Loss=0.4133 Lr=0.1000
+[12/03 18:00:39 cifar10-resnet34]: [Eval] Epoch=87 Acc@1=90.8300 Acc@5=99.6200 Loss=0.3525 Lr=0.1000
+[12/03 18:02:12 cifar10-resnet34]: [Eval] Epoch=88 Acc@1=91.1500 Acc@5=99.6400 Loss=0.3620 Lr=0.1000
+[12/03 18:03:42 cifar10-resnet34]: [Eval] Epoch=89 Acc@1=91.6200 Acc@5=99.7100 Loss=0.3302 Lr=0.1000
+[12/03 18:05:12 cifar10-resnet34]: [Eval] Epoch=90 Acc@1=90.8800 Acc@5=99.7400 Loss=0.3532 Lr=0.1000
+[12/03 18:06:42 cifar10-resnet34]: [Eval] Epoch=91 Acc@1=90.4300 Acc@5=99.5700 Loss=0.3973 Lr=0.1000
+[12/03 18:08:13 cifar10-resnet34]: [Eval] Epoch=92 Acc@1=90.9900 Acc@5=99.6700 Loss=0.3679 Lr=0.1000
+[12/03 18:09:43 cifar10-resnet34]: [Eval] Epoch=93 Acc@1=90.4800 Acc@5=99.5900 Loss=0.4120 Lr=0.1000
+[12/03 18:11:14 cifar10-resnet34]: [Eval] Epoch=94 Acc@1=90.7500 Acc@5=99.6700 Loss=0.3651 Lr=0.1000
+[12/03 18:12:45 cifar10-resnet34]: [Eval] Epoch=95 Acc@1=90.5200 Acc@5=99.6100 Loss=0.3781 Lr=0.1000
+[12/03 18:14:16 cifar10-resnet34]: [Eval] Epoch=96 Acc@1=90.9500 Acc@5=99.6900 Loss=0.3807 Lr=0.1000
+[12/03 18:15:48 cifar10-resnet34]: [Eval] Epoch=97 Acc@1=89.9900 Acc@5=99.6100 Loss=0.4150 Lr=0.1000
+[12/03 18:17:19 cifar10-resnet34]: [Eval] Epoch=98 Acc@1=91.2100 Acc@5=99.5700 Loss=0.3638 Lr=0.1000
+[12/03 18:18:50 cifar10-resnet34]: [Eval] Epoch=99 Acc@1=91.7500 Acc@5=99.7400 Loss=0.3055 Lr=0.1000
+[12/03 18:20:22 cifar10-resnet34]: [Eval] Epoch=100 Acc@1=90.3400 Acc@5=99.5800 Loss=0.3803 Lr=0.1000
+[12/03 18:21:54 cifar10-resnet34]: [Eval] Epoch=101 Acc@1=91.4000 Acc@5=99.6200 Loss=0.3263 Lr=0.1000
+[12/03 18:23:25 cifar10-resnet34]: [Eval] Epoch=102 Acc@1=89.8800 Acc@5=99.6100 Loss=0.4238 Lr=0.1000
+[12/03 18:24:57 cifar10-resnet34]: [Eval] Epoch=103 Acc@1=90.6400 Acc@5=99.6500 Loss=0.3742 Lr=0.1000
+[12/03 18:26:29 cifar10-resnet34]: [Eval] Epoch=104 Acc@1=90.4500 Acc@5=99.5900 Loss=0.3822 Lr=0.1000
+[12/03 18:28:01 cifar10-resnet34]: [Eval] Epoch=105 Acc@1=91.2300 Acc@5=99.7400 Loss=0.3435 Lr=0.1000
+[12/03 18:29:34 cifar10-resnet34]: [Eval] Epoch=106 Acc@1=89.4900 Acc@5=99.7200 Loss=0.4166 Lr=0.1000
+[12/03 18:31:05 cifar10-resnet34]: [Eval] Epoch=107 Acc@1=89.4100 Acc@5=99.5600 Loss=0.4513 Lr=0.1000
+[12/03 18:32:38 cifar10-resnet34]: [Eval] Epoch=108 Acc@1=91.1800 Acc@5=99.7000 Loss=0.3307 Lr=0.1000
+[12/03 18:34:09 cifar10-resnet34]: [Eval] Epoch=109 Acc@1=91.4200 Acc@5=99.7900 Loss=0.3525 Lr=0.1000
+[12/03 18:35:42 cifar10-resnet34]: [Eval] Epoch=110 Acc@1=91.0400 Acc@5=99.7400 Loss=0.3753 Lr=0.1000
+[12/03 18:37:14 cifar10-resnet34]: [Eval] Epoch=111 Acc@1=90.6200 Acc@5=99.6000 Loss=0.3698 Lr=0.1000
+[12/03 18:38:43 cifar10-resnet34]: [Eval] Epoch=112 Acc@1=90.6800 Acc@5=99.6200 Loss=0.3964 Lr=0.1000
+[12/03 18:40:13 cifar10-resnet34]: [Eval] Epoch=113 Acc@1=91.1000 Acc@5=99.7200 Loss=0.3415 Lr=0.1000
+[12/03 18:41:44 cifar10-resnet34]: [Eval] Epoch=114 Acc@1=89.4000 Acc@5=99.3600 Loss=0.4770 Lr=0.1000
+[12/03 18:43:14 cifar10-resnet34]: [Eval] Epoch=115 Acc@1=91.2000 Acc@5=99.6300 Loss=0.3635 Lr=0.1000
+[12/03 18:44:45 cifar10-resnet34]: [Eval] Epoch=116 Acc@1=90.7400 Acc@5=99.6500 Loss=0.3613 Lr=0.1000
+[12/03 18:46:16 cifar10-resnet34]: [Eval] Epoch=117 Acc@1=90.5900 Acc@5=99.5700 Loss=0.3958 Lr=0.1000
+[12/03 18:47:46 cifar10-resnet34]: [Eval] Epoch=118 Acc@1=90.9700 Acc@5=99.6400 Loss=0.3728 Lr=0.1000
+[12/03 18:49:17 cifar10-resnet34]: [Eval] Epoch=119 Acc@1=89.5000 Acc@5=99.6200 Loss=0.4308 Lr=0.1000
+[12/03 18:50:48 cifar10-resnet34]: [Eval] Epoch=120 Acc@1=93.7500 Acc@5=99.7600 Loss=0.2437 Lr=0.0200
+[12/03 18:52:20 cifar10-resnet34]: [Eval] Epoch=121 Acc@1=94.0200 Acc@5=99.7800 Loss=0.2451 Lr=0.0200
+[12/03 18:53:51 cifar10-resnet34]: [Eval] Epoch=122 Acc@1=94.1100 Acc@5=99.7600 Loss=0.2466 Lr=0.0200
+[12/03 18:55:23 cifar10-resnet34]: [Eval] Epoch=123 Acc@1=94.2000 Acc@5=99.7600 Loss=0.2459 Lr=0.0200
+[12/03 18:56:54 cifar10-resnet34]: [Eval] Epoch=124 Acc@1=94.1400 Acc@5=99.7800 Loss=0.2508 Lr=0.0200
+[12/03 18:58:25 cifar10-resnet34]: [Eval] Epoch=125 Acc@1=94.3400 Acc@5=99.7800 Loss=0.2481 Lr=0.0200
+[12/03 18:59:56 cifar10-resnet34]: [Eval] Epoch=126 Acc@1=94.3500 Acc@5=99.8000 Loss=0.2483 Lr=0.0200
+[12/03 19:01:27 cifar10-resnet34]: [Eval] Epoch=127 Acc@1=94.4500 Acc@5=99.8100 Loss=0.2469 Lr=0.0200
+[12/03 19:02:59 cifar10-resnet34]: [Eval] Epoch=128 Acc@1=94.3700 Acc@5=99.7900 Loss=0.2508 Lr=0.0200
+[12/03 19:04:29 cifar10-resnet34]: [Eval] Epoch=129 Acc@1=94.3700 Acc@5=99.7900 Loss=0.2510 Lr=0.0200
+[12/03 19:06:01 cifar10-resnet34]: [Eval] Epoch=130 Acc@1=94.3900 Acc@5=99.8000 Loss=0.2490 Lr=0.0200
+[12/03 19:07:33 cifar10-resnet34]: [Eval] Epoch=131 Acc@1=94.4000 Acc@5=99.8000 Loss=0.2511 Lr=0.0200
+[12/03 19:09:03 cifar10-resnet34]: [Eval] Epoch=132 Acc@1=94.5900 Acc@5=99.8100 Loss=0.2516 Lr=0.0200
+[12/03 19:10:35 cifar10-resnet34]: [Eval] Epoch=133 Acc@1=94.4500 Acc@5=99.8000 Loss=0.2507 Lr=0.0200
+[12/03 19:12:06 cifar10-resnet34]: [Eval] Epoch=134 Acc@1=94.5600 Acc@5=99.7900 Loss=0.2488 Lr=0.0200
+[12/03 19:13:36 cifar10-resnet34]: [Eval] Epoch=135 Acc@1=94.6400 Acc@5=99.8100 Loss=0.2508 Lr=0.0200
+[12/03 19:15:06 cifar10-resnet34]: [Eval] Epoch=136 Acc@1=94.6200 Acc@5=99.7900 Loss=0.2458 Lr=0.0200
+[12/03 19:16:36 cifar10-resnet34]: [Eval] Epoch=137 Acc@1=94.5900 Acc@5=99.8000 Loss=0.2469 Lr=0.0200
+[12/03 19:18:06 cifar10-resnet34]: [Eval] Epoch=138 Acc@1=94.5400 Acc@5=99.7800 Loss=0.2482 Lr=0.0200
+[12/03 19:19:36 cifar10-resnet34]: [Eval] Epoch=139 Acc@1=94.5600 Acc@5=99.8100 Loss=0.2480 Lr=0.0200
+[12/03 19:21:06 cifar10-resnet34]: [Eval] Epoch=140 Acc@1=94.6500 Acc@5=99.8000 Loss=0.2491 Lr=0.0200
+[12/03 19:22:37 cifar10-resnet34]: [Eval] Epoch=141 Acc@1=94.6600 Acc@5=99.7700 Loss=0.2469 Lr=0.0200
+[12/03 19:24:07 cifar10-resnet34]: [Eval] Epoch=142 Acc@1=94.7400 Acc@5=99.8000 Loss=0.2484 Lr=0.0200
+[12/03 19:25:38 cifar10-resnet34]: [Eval] Epoch=143 Acc@1=94.6900 Acc@5=99.7700 Loss=0.2480 Lr=0.0200
+[12/03 19:27:08 cifar10-resnet34]: [Eval] Epoch=144 Acc@1=94.5600 Acc@5=99.7800 Loss=0.2479 Lr=0.0200
+[12/03 19:28:39 cifar10-resnet34]: [Eval] Epoch=145 Acc@1=94.5700 Acc@5=99.7700 Loss=0.2488 Lr=0.0200
+[12/03 19:30:09 cifar10-resnet34]: [Eval] Epoch=146 Acc@1=94.5400 Acc@5=99.7700 Loss=0.2464 Lr=0.0200
+[12/03 19:31:41 cifar10-resnet34]: [Eval] Epoch=147 Acc@1=94.7300 Acc@5=99.7800 Loss=0.2449 Lr=0.0200
+[12/03 19:33:12 cifar10-resnet34]: [Eval] Epoch=148 Acc@1=94.6900 Acc@5=99.7800 Loss=0.2469 Lr=0.0200
+[12/03 19:34:43 cifar10-resnet34]: [Eval] Epoch=149 Acc@1=94.6400 Acc@5=99.7800 Loss=0.2467 Lr=0.0200
+[12/03 19:36:14 cifar10-resnet34]: [Eval] Epoch=150 Acc@1=94.6500 Acc@5=99.7600 Loss=0.2476 Lr=0.0040
+[12/03 19:37:45 cifar10-resnet34]: [Eval] Epoch=151 Acc@1=94.6500 Acc@5=99.7700 Loss=0.2474 Lr=0.0040
+[12/03 19:39:16 cifar10-resnet34]: [Eval] Epoch=152 Acc@1=94.6300 Acc@5=99.7900 Loss=0.2461 Lr=0.0040
+[12/03 19:40:49 cifar10-resnet34]: [Eval] Epoch=153 Acc@1=94.6800 Acc@5=99.7900 Loss=0.2474 Lr=0.0040
+[12/03 19:42:20 cifar10-resnet34]: [Eval] Epoch=154 Acc@1=94.7000 Acc@5=99.7600 Loss=0.2454 Lr=0.0040
+[12/03 19:43:52 cifar10-resnet34]: [Eval] Epoch=155 Acc@1=94.6600 Acc@5=99.7800 Loss=0.2460 Lr=0.0040
+[12/03 19:45:24 cifar10-resnet34]: [Eval] Epoch=156 Acc@1=94.7000 Acc@5=99.8100 Loss=0.2444 Lr=0.0040
+[12/03 19:46:54 cifar10-resnet34]: [Eval] Epoch=157 Acc@1=94.6700 Acc@5=99.7600 Loss=0.2464 Lr=0.0040
+[12/03 19:48:24 cifar10-resnet34]: [Eval] Epoch=158 Acc@1=94.6500 Acc@5=99.7800 Loss=0.2468 Lr=0.0040
+[12/03 19:49:54 cifar10-resnet34]: [Eval] Epoch=159 Acc@1=94.6700 Acc@5=99.7800 Loss=0.2467 Lr=0.0040
+[12/03 19:51:24 cifar10-resnet34]: [Eval] Epoch=160 Acc@1=94.5900 Acc@5=99.7700 Loss=0.2459 Lr=0.0040
+[12/03 19:52:54 cifar10-resnet34]: [Eval] Epoch=161 Acc@1=94.6700 Acc@5=99.7500 Loss=0.2472 Lr=0.0040
+[12/03 19:54:25 cifar10-resnet34]: [Eval] Epoch=162 Acc@1=94.6500 Acc@5=99.7700 Loss=0.2472 Lr=0.0040
+[12/03 19:55:55 cifar10-resnet34]: [Eval] Epoch=163 Acc@1=94.6000 Acc@5=99.7800 Loss=0.2460 Lr=0.0040
+[12/03 19:57:27 cifar10-resnet34]: [Eval] Epoch=164 Acc@1=94.6800 Acc@5=99.7800 Loss=0.2461 Lr=0.0040
+[12/03 19:58:58 cifar10-resnet34]: [Eval] Epoch=165 Acc@1=94.6500 Acc@5=99.7600 Loss=0.2470 Lr=0.0040
+[12/03 20:00:29 cifar10-resnet34]: [Eval] Epoch=166 Acc@1=94.7000 Acc@5=99.7700 Loss=0.2467 Lr=0.0040
+[12/03 20:02:00 cifar10-resnet34]: [Eval] Epoch=167 Acc@1=94.6700 Acc@5=99.7600 Loss=0.2473 Lr=0.0040
+[12/03 20:03:31 cifar10-resnet34]: [Eval] Epoch=168 Acc@1=94.7100 Acc@5=99.7800 Loss=0.2461 Lr=0.0040
+[12/03 20:05:03 cifar10-resnet34]: [Eval] Epoch=169 Acc@1=94.7200 Acc@5=99.7700 Loss=0.2469 Lr=0.0040
+[12/03 20:06:34 cifar10-resnet34]: [Eval] Epoch=170 Acc@1=94.6600 Acc@5=99.7900 Loss=0.2453 Lr=0.0040
+[12/03 20:08:06 cifar10-resnet34]: [Eval] Epoch=171 Acc@1=94.7800 Acc@5=99.7500 Loss=0.2463 Lr=0.0040
+[12/03 20:09:37 cifar10-resnet34]: [Eval] Epoch=172 Acc@1=94.7300 Acc@5=99.7700 Loss=0.2457 Lr=0.0040
+[12/03 20:11:10 cifar10-resnet34]: [Eval] Epoch=173 Acc@1=94.6400 Acc@5=99.7900 Loss=0.2450 Lr=0.0040
+[12/03 20:12:43 cifar10-resnet34]: [Eval] Epoch=174 Acc@1=94.6800 Acc@5=99.7800 Loss=0.2452 Lr=0.0040
+[12/03 20:14:14 cifar10-resnet34]: [Eval] Epoch=175 Acc@1=94.7800 Acc@5=99.7700 Loss=0.2466 Lr=0.0040
+[12/03 20:15:46 cifar10-resnet34]: [Eval] Epoch=176 Acc@1=94.7000 Acc@5=99.7800 Loss=0.2437 Lr=0.0040
+[12/03 20:17:18 cifar10-resnet34]: [Eval] Epoch=177 Acc@1=94.7900 Acc@5=99.7700 Loss=0.2445 Lr=0.0040
+[12/03 20:18:50 cifar10-resnet34]: [Eval] Epoch=178 Acc@1=94.7300 Acc@5=99.7800 Loss=0.2446 Lr=0.0040
+[12/03 20:20:21 cifar10-resnet34]: [Eval] Epoch=179 Acc@1=94.6600 Acc@5=99.7800 Loss=0.2439 Lr=0.0040
+[12/03 20:21:52 cifar10-resnet34]: [Eval] Epoch=180 Acc@1=94.7400 Acc@5=99.7700 Loss=0.2442 Lr=0.0008
+[12/03 20:23:21 cifar10-resnet34]: [Eval] Epoch=181 Acc@1=94.7200 Acc@5=99.7600 Loss=0.2455 Lr=0.0008
+[12/03 20:24:52 cifar10-resnet34]: [Eval] Epoch=182 Acc@1=94.6700 Acc@5=99.7600 Loss=0.2444 Lr=0.0008
+[12/03 20:26:22 cifar10-resnet34]: [Eval] Epoch=183 Acc@1=94.7000 Acc@5=99.7900 Loss=0.2441 Lr=0.0008
+[12/03 20:27:53 cifar10-resnet34]: [Eval] Epoch=184 Acc@1=94.7300 Acc@5=99.7600 Loss=0.2441 Lr=0.0008
+[12/03 20:29:24 cifar10-resnet34]: [Eval] Epoch=185 Acc@1=94.6900 Acc@5=99.7700 Loss=0.2439 Lr=0.0008
+[12/03 20:30:54 cifar10-resnet34]: [Eval] Epoch=186 Acc@1=94.7000 Acc@5=99.7800 Loss=0.2434 Lr=0.0008
+[12/03 20:32:26 cifar10-resnet34]: [Eval] Epoch=187 Acc@1=94.6400 Acc@5=99.7600 Loss=0.2455 Lr=0.0008
+[12/03 20:33:57 cifar10-resnet34]: [Eval] Epoch=188 Acc@1=94.6700 Acc@5=99.7600 Loss=0.2435 Lr=0.0008
+[12/03 20:35:28 cifar10-resnet34]: [Eval] Epoch=189 Acc@1=94.6900 Acc@5=99.7500 Loss=0.2434 Lr=0.0008
+[12/03 20:37:00 cifar10-resnet34]: [Eval] Epoch=190 Acc@1=94.6500 Acc@5=99.7500 Loss=0.2442 Lr=0.0008
+[12/03 20:38:31 cifar10-resnet34]: [Eval] Epoch=191 Acc@1=94.7100 Acc@5=99.7800 Loss=0.2455 Lr=0.0008
+[12/03 20:40:04 cifar10-resnet34]: [Eval] Epoch=192 Acc@1=94.7100 Acc@5=99.7600 Loss=0.2429 Lr=0.0008
+[12/03 20:41:35 cifar10-resnet34]: [Eval] Epoch=193 Acc@1=94.7200 Acc@5=99.7700 Loss=0.2441 Lr=0.0008
+[12/03 20:43:07 cifar10-resnet34]: [Eval] Epoch=194 Acc@1=94.7200 Acc@5=99.7700 Loss=0.2432 Lr=0.0008
+[12/03 20:44:38 cifar10-resnet34]: [Eval] Epoch=195 Acc@1=94.7100 Acc@5=99.7600 Loss=0.2432 Lr=0.0008
+[12/03 20:46:11 cifar10-resnet34]: [Eval] Epoch=196 Acc@1=94.7200 Acc@5=99.7700 Loss=0.2444 Lr=0.0008
+[12/03 20:47:43 cifar10-resnet34]: [Eval] Epoch=197 Acc@1=94.7600 Acc@5=99.7700 Loss=0.2435 Lr=0.0008
+[12/03 20:49:15 cifar10-resnet34]: [Eval] Epoch=198 Acc@1=94.7400 Acc@5=99.7600 Loss=0.2435 Lr=0.0008
+[12/03 20:50:47 cifar10-resnet34]: [Eval] Epoch=199 Acc@1=94.7600 Acc@5=99.7700 Loss=0.2429 Lr=0.0008
+[12/03 20:50:47 cifar10-resnet34]: Best: 94.7900

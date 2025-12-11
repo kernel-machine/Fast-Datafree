@@ -1,0 +1,53 @@
+		// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "FAST",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "docker.io/nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04",
+  	"shutdownAction": "none",
+	"runArgs": [
+		"--device","nvidia.com/gpu=0",
+		"--ipc",
+		"host"
+	],
+	"postCreateCommand": "apt-get update && apt-get install -y python3.11 python3.11-venv python3.11-dev nvtop task-spooler git",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root",
+	"containerEnv": {
+		"ISCONTAINER":"1",
+		"SKIP_EMAIL":"1"
+	},
+	// "mounts": [
+	// 	{
+	// 	"source": "/media/luca/data/kd_pipeline",
+	// 	"target": "/work",
+	// 	"type": "bind"
+	// 	}
+	// ],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.isort",
+				"ms-python.vscode-pylance",
+				"ms-python.vscode-python-envs",
+				"ms-python.debugpy",
+				"ms-python.autopep8"
+			]
+		}
+	}
+}

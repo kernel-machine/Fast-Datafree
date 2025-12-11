@@ -33,6 +33,7 @@ parser.add_argument('--oh', default=0, type=float, help='scaling factor for one 
 parser.add_argument('--act', default=0, type=float, help='scaling factor for activation loss used in DAFL')
 parser.add_argument('--balance', default=0, type=float, help='scaling factor for class balance')
 parser.add_argument('--save_dir', default='run/synthesis', type=str)
+parser.add_argument('--flatten', default=False, action="store_true")
 
 parser.add_argument('--cr', default=1, type=float, help='scaling factor for contrastive model inversion')
 parser.add_argument('--cr_T', default=0.5, type=float, help='temperature for contrastive model inversion')
@@ -85,7 +86,7 @@ parser.add_argument('--synthesis_batch_size', default=None, type=int,
                          'using Data Parallel or Distributed Data Parallel')
 
 # Device
-parser.add_argument('--gpu', default=0, type=int,
+parser.add_argument('--gpu', default=None, type=int,
                     help='GPU id to use.')
 # TODO: Distributed and FP-16 training 
 parser.add_argument('--world_size', default=-1, type=int,
@@ -131,6 +132,7 @@ def main():
         random.seed(args.seed)
         torch.manual_seed(args.seed)
         cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
         warnings.warn('You have chosen to seed training. '
                       'This will turn on the CUDNN deterministic setting, '
                       'which can slow down your training considerably! '
@@ -243,7 +245,7 @@ def main_worker(gpu, ngpus_per_node, args):
     student = registry.get_model(args.student, num_classes=num_classes)
     teacher = registry.get_model(args.teacher, num_classes=num_classes, pretrained=True).eval()
     args.normalizer = normalizer = datafree.utils.Normalizer(**registry.NORMALIZE_DICT[args.dataset])
-    teacher.load_state_dict(torch.load('checkpoints/pretrained/%s_%s.pth'%(args.dataset, args.teacher), map_location='cpu')['state_dict'])
+    teacher.load_state_dict(torch.load('checkpoints/pretrained/%s_%s.pth'%(args.dataset, args.teacher), map_location='cpu'))
     student = prepare_model(student)
     teacher = prepare_model(teacher)
     criterion = datafree.criterions.KLDiv(T=args.T)
@@ -300,7 +302,7 @@ def main_worker(gpu, ngpus_per_node, args):
                  iterations=args.g_steps, warmup=args.warmup, lr_g=args.lr_g, lr_z=args.lr_z,
                  adv=args.adv, bn=args.bn, oh=args.oh,
                  reset_l0=args.reset_l0, reset_bn=args.reset_bn,
-                 bn_mmt=args.bn_mmt, is_maml=args.is_maml)
+                 bn_mmt=args.bn_mmt, is_maml=args.is_maml, flatten=args.flatten)
     elif args.method=='fast_meta':
         nz = 256
         generator = datafree.models.generator.Generator(nz=nz, ngf=64, img_size=32, nc=3)
@@ -313,7 +315,7 @@ def main_worker(gpu, ngpus_per_node, args):
                  iterations=args.g_steps, warmup=args.warmup, lr_g=args.lr_g, lr_z=args.lr_z,
                  adv=args.adv, bn=args.bn, oh=args.oh,
                  reset_l0=args.reset_l0, reset_bn=args.reset_bn,
-                 bn_mmt=args.bn_mmt, is_maml=args.is_maml)
+                 bn_mmt=args.bn_mmt, is_maml=args.is_maml, flatten=args.flatten)
     else: raise NotImplementedError
         
     ############################################
