@@ -230,3 +230,6 @@ class FastSynthesizer(BaseSynthesis):
 
     def sample(self):
         return self.data_iter.next()
+
+    def update_acc(self, acc:float, key:str):
+        self.writer.add_scalar(key, acc, self.ep)

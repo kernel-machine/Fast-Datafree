@@ -383,6 +383,11 @@ def main_worker(gpu, ngpus_per_node, args):
         (acc1, acc5), val_loss = eval_results['Acc'], eval_results['Loss']
         args.logger.info('[Eval] Epoch={current_epoch} Acc@1={acc1:.4f} Acc@5={acc5:.4f} Loss={loss:.4f} Lr={lr:.4f}'
                 .format(current_epoch=args.current_epoch, acc1=acc1, acc5=acc5, loss=val_loss, lr=optimizer.param_groups[0]['lr']))
+        
+        if isinstance(synthesizer, datafree.synthesis.FastSynthesizer):
+
+            synthesizer.update_acc(acc1/100,"Student/Acc")
+            synthesizer.update_acc(val_loss,"Student/Loss")
 
         is_best = acc1 > best_acc1
         best_acc1 = max(acc1, best_acc1)
