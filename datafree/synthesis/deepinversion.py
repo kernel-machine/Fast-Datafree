@@ -87,7 +87,7 @@ class DeepInvSyntheiszer(BaseSynthesis):
             targets = targets.sort()[0]  # sort for better visualization
         targets = targets.to(self.device)
 
-        optimizer = torch.optim.Adam([inputs], self.lr_g, betas=[0.5, 0.99])
+        optimizer = torch.optim.Adam([inputs], self.lr_g, betas=[0.5, 0.9])
         # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR( optimizer, T_max=self.iterations )
 
         best_targets = None

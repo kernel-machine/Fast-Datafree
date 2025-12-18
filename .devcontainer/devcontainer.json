@@ -3,7 +3,7 @@
 {
 	"name": "FAST",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "docker.io/nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04",
+	"image": "docker.io/nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04",
   	"shutdownAction": "none",
 	"runArgs": [
 		"--device","nvidia.com/gpu=0",

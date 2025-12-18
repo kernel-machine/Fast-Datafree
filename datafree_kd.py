@@ -11,6 +11,7 @@ import datafree
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from tqdm import tqdm
 
 import torch.nn.parallel
 import torch.backends.cudnn as cudnn
@@ -245,7 +246,7 @@ def main_worker(gpu, ngpus_per_node, args):
     student = registry.get_model(args.student, num_classes=num_classes)
     teacher = registry.get_model(args.teacher, num_classes=num_classes, pretrained=True).eval()
     args.normalizer = normalizer = datafree.utils.Normalizer(**registry.NORMALIZE_DICT[args.dataset])
-    teacher.load_state_dict(torch.load('checkpoints/pretrained/%s_%s.pth'%(args.dataset, args.teacher), map_location='cpu'))
+    teacher.load_state_dict(torch.load('checkpoints/pretrained/%s_%s.pth'%(args.dataset, args.teacher), map_location='cpu')['state_dict'])
     student = prepare_model(student)
     teacher = prepare_model(teacher)
     criterion = datafree.criterions.KLDiv(T=args.T)
@@ -420,7 +421,8 @@ def train(synthesizer, model, criterion, optimizer, args):
     optimizer = optimizer
     student.train()
     teacher.eval()
-    for i in range(args.kd_steps):
+    kd_steps = tqdm(range(args.kd_steps), desc='KD', ncols=0)
+    for i in kd_steps:
         if args.method in ['zskt', 'dfad', 'dfq', 'dafl']:
             images, cost = synthesizer.sample()
             time_cost += cost

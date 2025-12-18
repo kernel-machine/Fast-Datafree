@@ -27,8 +27,8 @@ python datafree_kd.py \
 --method cmi \
 --dataset cifar100 \
 --batch_size 256 \
---teacher wrn40_2 \
---student wrn16_1 \
+--teacher resnet34 \
+--student resnet18 \
 --lr 0.1 \
 --kd_steps 400 \
 --ep_steps 400 \
@@ -41,8 +41,8 @@ python datafree_kd.py \
 --cr_T 0.2 \
 --act 0 \
 --balance 0 \
---gpu 2 \
 --seed 0 \
 --T 20 \
 --save_dir run/cmi_fast_cifar100_5 \
 --log_tag cmi_fast_cifar100_5
+--gpu 0 \

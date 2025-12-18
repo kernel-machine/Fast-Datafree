@@ -12,6 +12,7 @@ from datafree.criterions import jsdiv, get_image_prior_losses, kldiv
 from datafree.utils import ImagePool, DataIter, clip_images
 import collections
 from torchvision import transforms
+import torchvision
 from kornia import augmentation
 import time
 from math import log
@@ -96,7 +97,7 @@ class FastSynthesizer(BaseSynthesis):
         self.prev_z = None
         self.classes_counter = [0 for _ in range(self.num_classes)]
 
-        for m in teacher.modules():
+        for m in self.teacher.modules():
             if isinstance(m, nn.BatchNorm2d):
                 self.hooks.append(DeepInversionHook(m, self.bn_mmt))
         self.aug = transforms.Compose([
@@ -138,13 +139,16 @@ class FastSynthesizer(BaseSynthesis):
         gen_bar = tqdm(range(self.iterations), desc="Generation", leave=True)
         for it in gen_bar:
             
+            start_time = time.time()
             inputs = self.generator(z)
             inputs_aug = self.aug(inputs)  # crop and normalize
-
+            gen_time = time.time() - start_time
             #############################################
             # Inversion Loss
             #############################################
+            start_time = time.time()
             t_out = self.teacher(inputs_aug)
+            classification_time = time.time() - start_time
 
             loss_bn = sum([h.r_feature for h in self.hooks])
             loss_oh = F.cross_entropy(t_out, targets)
@@ -163,7 +167,9 @@ class FastSynthesizer(BaseSynthesis):
                 "L_oh":loss_oh.item(),
                 "L_adv":loss_adv.item(),
                 "L_feat":loss_bn.item(),
-                "L_g":loss.item()
+                "L_g":loss.item(),
+                "gen_ms":gen_time*1000,
+                "class_ms":classification_time*1000
                 })
             
             

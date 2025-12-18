@@ -44,3 +44,26 @@ python datafree_kd.py \
 --seed 0 \
 --save_dir run/deepinv_fast \
 --log_tag deepinv_fast
+
+python datafree_kd.py \
+--method deepinv \
+--dataset cifar10 \
+--batch_size 256 \
+--teacher resnet34 \
+--student resnet18 \
+--lr 0.1 \
+--epochs 200 \
+--kd_steps 200 \
+--ep_steps 200 \
+--g_steps 10 \
+--lr_g 1 \
+--adv 1 \
+--bn 10 \
+--oh 1 \
+--T 20 \
+--act 0 \
+--balance 0 \
+--gpu 0 \
+--seed 0 \
+--save_dir run/deepinv_fast \
+--log_tag deepinv_fast

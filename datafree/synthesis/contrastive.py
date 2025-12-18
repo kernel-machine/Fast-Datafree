@@ -14,6 +14,7 @@ from datafree.utils import ImagePool, DataIter, clip_images
 import collections
 from torchvision import transforms
 from kornia import augmentation
+from tqdm import tqdm
 
 class MLPHead(nn.Module):
     def __init__(self, dim_in, dim_feat, dim_h=None):
@@ -186,7 +187,8 @@ class CMISynthesizer(BaseSynthesis):
             reset_model(self.generator)
         optimizer = torch.optim.Adam([{'params': self.generator.parameters()}, {'params': [z]}], self.lr_g, betas=[0.5, 0.999])
         #scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=self.iterations, eta_min=0.1*self.lr)
-        for it in range(self.iterations):
+        iter_bar = tqdm(range(self.iterations), desc='Synthesis', ncols=0)
+        for it in iter_bar:
             inputs = self.generator(z)
             global_view, local_view = self.aug(inputs) # crop and normalize
 
@@ -207,9 +209,9 @@ class CMISynthesizer(BaseSynthesis):
             #############################################
             # Contrastive Loss
             #############################################
-            if self.cr>0:
+            if self.cr>0: #Always False
                 global_feature = torch.cat([ h.instance_mean for h in self.cmi_hooks ], dim=1)
-                _ = self.teacher(local_view)
+                #_ = self.teacher(local_view)
                 local_feature = torch.cat([ h.instance_mean for h in self.cmi_hooks ], dim=1)
                 # end1 = time.time()
                 cached_feature, _ = self.mem_bank.get_data(self.n_neg)
@@ -231,7 +233,7 @@ class CMISynthesizer(BaseSynthesis):
                 if best_cost > loss.item() or best_inputs is None:
                     best_cost = loss.item()
                     best_inputs = inputs.data
-                    best_features = torch.cat([local_feature.data, global_feature.data], dim=1).data
+                    #best_features = torch.cat([local_feature.data, global_feature.data], dim=1).data
             optimizer.zero_grad()
             self.optimizer_head.zero_grad()
             loss.backward()
@@ -241,7 +243,7 @@ class CMISynthesizer(BaseSynthesis):
         self.student.train()
         end = time.time()
         self.data_pool.add( best_inputs )
-        self.mem_bank.add( best_features )
+        #self.mem_bank.add( best_features )
 
         dst = self.data_pool.get_dataset(transform=self.transform)
         if self.init_dataset is not None:
